@@ -7,18 +7,25 @@ TODO: short project description, some sample screenshots or mockups
 
 ## Architecture
 
-TODO:  descriptions of code organization and tools and libraries used
+* node with babel
+* expressjs
+* airbnb eslint rules
 
 ## Setup
 
-TODO: how to get the project dev environment up and running, npm install etc
+* npm install
+* npm start
 
 ## Deployment
 
-TODO: how to deploy the project
+Procfile for Heroku included
+Settings for render.com:
+* build command:  `npm install && npm run build`
+* run command:  `npm run prod`
 
 ## Authors
 
 TODO: list of authors
 
 ## Acknowledgments
+
