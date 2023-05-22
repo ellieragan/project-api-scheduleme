@@ -18,7 +18,7 @@ export const EventSchema = new Schema({
   day: { type: Number, required: true },
   time: { type: Number, required: true },
   block: { type: Number, required: true },
-  availableCount: { type: Number, required: true },
+  count: { type: Number, required: true },
   available: { type: [Schema.Types.ObjectId], required: true },
 }, {
   timestamps: true,
