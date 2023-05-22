@@ -41,7 +41,7 @@ const handleGetEvent = async (req, res) => {
     const exist = await checkExistence(req.params.eventID);
     if (mongoose.isValidObjectId(req.params.eventID) && exist) {
       // use req.body etc to await some controller function
-      const result = await Event.getEvent(req.params.eventID);
+      const result = await Events.getEvent(req.params.eventID);
       // send back the result
       res.json(result);
     } else {

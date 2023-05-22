@@ -19,7 +19,7 @@ export const EventSchema = new Schema({
   time: { type: Number, required: true },
   block: { type: Number, required: true },
   count: { type: Number, required: true },
-  available: { type: [Schema.Types.ObjectId], required: true },
+  available: { type: [String] },
 }, {
   timestamps: true,
   toObject: { virtuals: true },
