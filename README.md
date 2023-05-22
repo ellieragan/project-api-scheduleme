@@ -24,6 +24,7 @@ Settings for render.com:
 * run command:  `npm run prod`
 
 ## Authors
+Zakiya Nasiru
 
 TODO: list of authors
 
