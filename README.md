@@ -3,6 +3,9 @@
 ![Team Photo](Insert a Team Photo URL here)
 [*how?*](https://help.github.com/articles/about-readmes/#relative-links-and-image-paths-in-readme-files)
 
+#### Deployed link: https://scheduleatnow.onrender.com/
+#### API link: https://scheduleatnow-api.onrender.com
+
 TODO: short project description, some sample screenshots or mockups
 
 ## Architecture
