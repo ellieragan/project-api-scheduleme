@@ -3,6 +3,7 @@ import { Router } from 'express';
 import mongoose from 'mongoose';
 import * as Events from './controllers/event_controller';
 import * as Users from './controllers/user_controller';
+import * as Schedulers from './controllers/scheduler_controller';
 import EventModel from './models/event_model';
 
 // CITATION: followed format of router in platform-api-MariaC27 (lab 5)
@@ -126,6 +127,42 @@ const handleGetUsers = async (req, res) => {
   }
 };
 
+const handleCreateSchedule = async (req, res) => {
+  try {
+    const result = await Schedulers.createScheduler(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleJoinSchedule = async (req, res) => {
+  try {
+    const result = await Schedulers.joinScheduler(req.params.scheduleID, req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleGetSchedulerID = async (req, res) => {
+  try {
+    const result = await Schedulers.getSchedulerID(req.params.scheduleID);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleGetSchedulers = async (req, res) => {
+  try {
+    const result = await Schedulers.getSchedulers();
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 router.route('/events/:eventID')
   .put(handleUpdate)
   .get(handleGetEvent)
@@ -141,5 +178,13 @@ router.route('/users')
 
 router.route('/users/:userID')
   .get(handleGetUserEvents);
+
+router.route('/schedulers')
+  .get(handleGetSchedulers)
+  .post(handleCreateSchedule);
+
+router.route('/schedulers/:scheduleID')
+  .put(handleJoinSchedule)
+  .get(handleGetSchedulerID);
 
 export default router;
