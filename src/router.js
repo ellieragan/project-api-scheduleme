@@ -139,7 +139,7 @@ router.route('/users')
   .post(handleCreateUser)
   .get(handleGetUsers);
 
-router.route('/users/:id')
+router.route('/users/:userID')
   .get(handleGetUserEvents);
 
 export default router;
