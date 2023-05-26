@@ -4,6 +4,7 @@ import mongoose, { Schema } from 'mongoose';
 export const UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
+  events: { type: [String], required: true },
 }, {
   timestamps: true,
   toObject: { virtuals: true },

@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import mongoose from 'mongoose';
 import * as Events from './controllers/event_controller';
+import * as Users from './controllers/user_controller';
 import EventModel from './models/event_model';
 
 // CITATION: followed format of router in platform-api-MariaC27 (lab 5)
@@ -98,6 +99,33 @@ const handleDelete = async (req, res) => {
   }
 };
 
+const handleCreateUser = async (req, res) => {
+  try {
+    const result = await Users.createUser(req.body);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleGetUserEvents = async (req, res) => {
+  try {
+    const result = await Users.getUserEvents(req.params.userID);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleGetUsers = async (req, res) => {
+  try {
+    const result = await Users.getUsers();
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
 router.route('/events/:eventID')
   .put(handleUpdate)
   .get(handleGetEvent)
@@ -106,5 +134,12 @@ router.route('/events/:eventID')
 router.route('/events')
   .get(handleGetEvents)
   .post(handleCreateEvent);
+
+router.route('/users')
+  .post(handleCreateUser)
+  .get(handleGetUsers);
+
+router.route('/users/:id')
+  .get(handleGetUserEvents);
 
 export default router;
