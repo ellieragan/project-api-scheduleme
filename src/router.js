@@ -136,27 +136,36 @@ const handleCreateSchedule = async (req, res) => {
   }
 };
 
-const handleJoinSchedule = async (req, res) => {
-  try {
-    const result = await Schedulers.joinScheduler(req.params.scheduleID, req.body);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-};
-
-const handleGetSchedulerID = async (req, res) => {
-  try {
-    const result = await Schedulers.getSchedulerID(req.params.scheduleID);
-    res.json(result);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
-};
+// const handleJoinSchedule = async (req, res) => {
+//   try {
+//     const result = await Schedulers.joinScheduler(req.params.scheduleID, req.body);
+//     res.json(result);
+//   } catch (error) {
+//     res.status(500).json({ error });
+//   }
+// };
 
 const handleGetSchedulers = async (req, res) => {
   try {
     const result = await Schedulers.getSchedulers();
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleGetScheduler = async (req, res) => {
+  try {
+    const result = await Schedulers.getScheduler(req.params.scheduleID);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+const handleUpdateScheduler = async (req, res) => {
+  try {
+    const result = await Schedulers.updateScheduler(req.params.scheduleID, req.body);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error });
@@ -184,7 +193,10 @@ router.route('/schedulers')
   .post(handleCreateSchedule);
 
 router.route('/schedulers/:scheduleID')
-  .put(handleJoinSchedule)
-  .get(handleGetSchedulerID);
+  .get(handleGetScheduler)
+  .put(handleUpdateScheduler);
+
+// router.route('/schedulers/:schedulerID/users/:userID')
+//   .put(handleJoinSchedule);
 
 export default router;

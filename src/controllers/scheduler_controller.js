@@ -8,9 +8,8 @@ import Scheduler from '../models/scheduler_model';
 export async function createScheduler(schedulerFields) {
   const scheduler = new Scheduler();
   scheduler.creator = schedulerFields.creator;
-  scheduler.daysOfInterest = schedulerFields.daysOfInterest;
   scheduler.users = schedulerFields.users;
-  scheduler.calendarID = schedulerFields.calendarID;
+  scheduler.events = schedulerFields.events;
   try {
     const savedScheduler = await scheduler.save();
     return savedScheduler; // return scheduler
@@ -20,26 +19,40 @@ export async function createScheduler(schedulerFields) {
 }
 
 // updated after a user goes through authentication
-export async function joinScheduler(schedulerId, userInfo) {
-  // find the calendar user is supposed to fill out. Will be helpful in refactoring share... maybe??
-  const scheduler = await Scheduler.findById(schedulerId);
-  const newUserEmail = userInfo.email;
-  scheduler.users.push(newUserEmail); // emails are more unique than names
+// may bnot neeed this
+// export async function joinScheduler(schedulerId, userInfo) {
+//   // find the calendar user is supposed to fill out. Will be helpful in refactoring share... maybe??
+//   const scheduler = await Scheduler.findById(schedulerId);
+//   const newUserEmail = userInfo.email;
+//   scheduler.users.push(newUserEmail); // emails are more unique than names
+//   try {
+//     const savedScheduler = await scheduler.save();
+//     return savedScheduler; // return scheduler
+//   } catch (error) {
+//     throw new Error(`join scheduler error: ${error}`);
+//   }
+// }
+
+// get a specific scheduler
+export async function getScheduler(id) {
   try {
-    const savedScheduler = await scheduler.save();
-    return savedScheduler; // return scheduler
+    const scheduler = await Scheduler.findById(id);
+    return scheduler;
   } catch (error) {
-    throw new Error(`join scheduler error: ${error}`);
+    throw new Error(`get scheduler error: ${error}`);
   }
 }
 
-// might be need for updating the url or not
-export async function getSchedulerID(id) {
+export async function updateScheduler(id, schedulerFields) {
   try {
     const scheduler = await Scheduler.findById(id);
-    return scheduler.calendarID;
+    scheduler.creator = schedulerFields.creator;
+    scheduler.users = schedulerFields.users;
+    scheduler.events = schedulerFields.events;
+    const savedScheduler = await scheduler.save();
+    return savedScheduler; // return scheduler
   } catch (error) {
-    throw new Error(`get scheduler error: ${error}`);
+    throw new Error(`update scheduler error: ${error}`);
   }
 }
 

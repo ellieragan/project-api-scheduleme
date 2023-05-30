@@ -5,7 +5,6 @@ import User from '../models/user_model';
 export async function createUser(userFields) {
   // all these can be got from the google calendar API
   const user = new User();
-  user.name = userFields.name;
   user.email = userFields.email;
   user.events = userFields.events;
   try {
