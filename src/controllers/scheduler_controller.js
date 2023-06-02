@@ -36,7 +36,7 @@ export async function createScheduler(schedulerFields) {
 // get a specific scheduler
 export async function getScheduler(id) {
   try {
-    const scheduler = await Scheduler.findById(id);
+    const scheduler = await Scheduler.findById(id).populate('events');
     return scheduler;
   } catch (error) {
     throw new Error(`get scheduler error: ${error}`);
